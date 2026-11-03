@@ -131,7 +131,7 @@ CONDICIONES GENERALES:
     try {
       // Usamos los IDs proporcionados directamente para evitar errores de configuración
       const SERVICE_ID = 'service_5fyu33a';
-      const TEMPLATE_ID = 'template_cbj6wwl';
+      const TEMPLATE_ID = 'template_j5excm7';
       const PUBLIC_KEY = 'qLX4T__AKzH3vnaqC';
 
       console.log('Iniciando envío con EmailJS...', { SERVICE_ID, TEMPLATE_ID });
@@ -163,7 +163,7 @@ CONDICIONES GENERALES:
       }
 
       setErrorMessage(
-        `${status} Error al enviar: ${detail}. Por favor, asegurate de que el Service ID (service_5fyu33a) y el Template ID (template_cbj6wwl) estén activos en tu panel de EmailJS.`
+        `${status} Error al enviar: ${detail}. Por favor, verificá la configuración de EmailJS o copiá el resumen.`
       );
     } finally {
       setIsSubmitting(false);
@@ -478,10 +478,9 @@ CONDICIONES GENERALES:
                   <div className="pt-2">
                     <p className="text-[10px] uppercase tracking-wider font-bold text-red-900/40 mb-1">Sugerencias técnicas:</p>
                     <ul className="text-[11px] text-red-700/80 list-disc pl-4 space-y-1">
-                      <li>Verificá que el <b>Service ID (service_5fyu33a)</b> esté conectado en EmailJS.</li>
-                      <li>Asegurate que la <b>Public Key</b> no tenga espacios.</li>
-                      <li>Si tenés un bloqueador de anuncios (AdBlock), terminalo para esta página.</li>
-                      <li>Si el error persiste, usá el botón de "Copiar resumen" y envialo por WhatsApp/Email manualmente.</li>
+                      <li>Verificá que el <b>Service ID (service_5fyu33a)</b> esté activo.</li>
+                      <li>Asegurate que la <b>Public Key</b> sea la correcta.</li>
+                      <li>Si el error persiste, usá el botón de "Copiar resumen" para envío manual.</li>
                     </ul>
                   </div>
                 </div>
