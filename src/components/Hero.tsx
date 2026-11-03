@@ -54,7 +54,7 @@ export const Hero: React.FC = () => {
             <div className="relative border border-[rgba(22,53,42,0.10)] bg-white p-2 shadow-sm">
               <div className="relative aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/5] overflow-hidden bg-[#FAF8F5]">
                 <img
-                  src="/src/assets/images/hero_luxury_property_architecture_1793659764651.jpg"
+                  src="/images/hero_luxury_property_architecture_1793659764651.jpg"
                   alt="Propiedad residencial contemporánea de alto estándar con arquitectura en piedra travertino y piscina"
                   referrerPolicy="no-referrer"
                   className="w-full h-full object-cover grayscale-[10%] contrast-[1.03] transition-transform duration-700 hover:scale-105"

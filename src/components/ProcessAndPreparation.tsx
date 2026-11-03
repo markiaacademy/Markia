@@ -79,7 +79,7 @@ export const ProcessAndPreparation: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
             <div className="md:col-span-4 aspect-[4/3] overflow-hidden border border-[rgba(22,53,42,0.08)]">
               <img
-                src="/src/assets/images/property_interior_living_detail_1793659765124.jpg"
+                src="/images/property_interior_living_detail_1793659765124.jpg"
                 alt="Detalle arquitectónico de sala de estar en residencia de lujo con muros de piedra caliza y vistas a la terraza"
                 referrerPolicy="no-referrer"
                 className="w-full h-full object-cover grayscale-[8%]"

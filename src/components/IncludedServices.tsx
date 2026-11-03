@@ -66,7 +66,7 @@ export const IncludedServices: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             <div className="lg:col-span-5 aspect-[4/3] overflow-hidden bg-[#FAF8F5] border border-[rgba(22,53,42,0.08)]">
               <img
-                src="/src/assets/images/filmmaker_edge_recording_session_1793660333128.jpg"
+                src="/images/filmmaker_edge_recording_session_1793660333128.jpg"
                 alt="Filmmaker en el margen registrando con cámara profesional a un equipo inmobiliario en sala de reuniones con vistas arquitectónicas"
                 referrerPolicy="no-referrer"
                 className="w-full h-full object-cover grayscale-[4%]"

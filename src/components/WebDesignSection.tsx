@@ -39,7 +39,7 @@ export const WebDesignSection: React.FC<WebDesignSectionProps> = ({ onSelectWebS
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             <div className="lg:col-span-7 aspect-[4/3] overflow-hidden bg-white border border-[rgba(22,53,42,0.08)]">
               <img
-                src="/src/assets/images/web_design_realestate_showcase_1793660532408.jpg"
+                src="/images/web_design_realestate_showcase_1793660532408.jpg"
                 alt="Diseño web inmobiliario minimalista presentado en laptop de diseñador en escritorio de piedra caliza"
                 referrerPolicy="no-referrer"
                 className="w-full h-full object-cover grayscale-[4%]"
