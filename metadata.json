@@ -1,0 +1,6 @@
+{
+  "name": "MARKIA · Presupuesto de Comunicación Inmobiliaria",
+  "description": "Propuesta y presupuesto de gestión integral de comunicación, contenidos y redes para el sector inmobiliario por MARKIA.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
