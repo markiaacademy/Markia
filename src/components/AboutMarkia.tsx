@@ -22,7 +22,7 @@ export const AboutMarkia: React.FC = () => {
           </div>
           <div className="aspect-[16/10] overflow-hidden border border-[rgba(22,53,42,0.10)] shadow-sm">
             <img 
-              src="/images/hero_luxury_property_architecture_1793659764651.jpg" 
+              src="/images/studio_creative_realestate_production_1793659766143.jpg" 
               alt="MARKIA Equipo y Estrategia" 
               className="w-full h-full object-cover grayscale-[10%]"
             />

@@ -33,6 +33,30 @@ export const WebDesignSection: React.FC<WebDesignSectionProps> = ({ onSelectWebS
           </p>
         </div>
 
+        {/* Visual Showcase Card */}
+        <div className="mb-16 border border-[rgba(22,53,42,0.10)] bg-[#FAF8F5] p-6 sm:p-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div className="lg:col-span-7 aspect-[4/3] overflow-hidden bg-white border border-[rgba(22,53,42,0.08)]">
+              <img
+                src="/images/web_design_realestate_showcase_1793660532408.jpg"
+                alt="Diseño web inmobiliario minimalista"
+                className="w-full h-full object-cover grayscale-[4%]"
+              />
+            </div>
+            <div className="lg:col-span-5 space-y-5">
+              <span className="text-[10px] uppercase tracking-widest font-bold text-[#16352A]/60">
+                Estrategia de Conversión
+              </span>
+              <h3 className="font-playfair text-2xl font-medium text-[#16352A]">
+                Páginas diseñadas para facilitar el contacto directo.
+              </h3>
+              <p className="text-sm text-[#475569] leading-relaxed font-['Inter']">
+                Concentramos la atención en un objetivo comercial único: captar propietarios, lanzar preventas o fidelizar clientes con oportunidades privadas.
+              </p>
+            </div>
+          </div>
+        </div>
+
         <div className="mb-20 grid grid-cols-1 md:grid-cols-3 gap-6">
           {WEB_PILLARS.map((pillar, index) => (
             <div

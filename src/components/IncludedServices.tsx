@@ -42,7 +42,7 @@ export const IncludedServices: React.FC = () => {
         <div className="mt-20 p-8 border border-[rgba(22,53,42,0.12)] bg-[#FAF8F5] flex flex-col md:flex-row items-center gap-8">
           <div className="md:w-1/3 aspect-square overflow-hidden border border-[rgba(22,53,42,0.08)] grayscale-[15%] contrast-[1.05]">
             <img
-              src="/images/filmmaker_recording_luxury_realestate_1793659765320.jpg"
+              src="/images/filmmaker_recording_realestate_team_1793660200940.jpg"
               alt="Coordinación de grabación profesional en oficina"
               className="w-full h-full object-cover"
             />
