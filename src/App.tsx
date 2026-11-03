@@ -11,6 +11,7 @@ import { Conditions } from './components/Conditions';
 import { FaqSection } from './components/FaqSection';
 import { ContactQuote } from './components/ContactQuote';
 import { Footer } from './components/Footer';
+import { WhatsAppButton } from './components/WhatsAppButton';
 
 export default function App() {
   const [serviceType, setServiceType] = useState<'cm' | 'web' | 'ambos' | 'asesoramiento'>('cm');
@@ -86,6 +87,9 @@ export default function App() {
 
       {/* Footer */}
       <Footer />
+
+      {/* Floating Actions */}
+      <WhatsAppButton />
     </div>
   );
 }
