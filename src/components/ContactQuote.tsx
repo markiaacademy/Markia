@@ -129,19 +129,39 @@ CONDICIONES GENERALES:
     };
 
     try {
-      if (serviceId && templateId && publicKey) {
-        await emailjs.send(serviceId, templateId, templateParams, publicKey);
-      } else {
-        // Fallback for development/missing keys
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-        console.warn('EmailJS keys missing, simulating successful send.');
-      }
+      // Usamos los IDs proporcionados directamente para evitar errores de configuración
+      const SERVICE_ID = 'service_5fyu33a';
+      const TEMPLATE_ID = 'template_cbj6wwl';
+      const PUBLIC_KEY = 'qLX4T__AKzH3vnaqC';
+
+      console.log('Iniciando envío con EmailJS...', { SERVICE_ID, TEMPLATE_ID });
+
+      const result = await emailjs.send(
+        SERVICE_ID,
+        TEMPLATE_ID,
+        templateParams,
+        PUBLIC_KEY
+      );
+
+      console.log('Respuesta exitosa de EmailJS:', result);
       setSubmitStatus('success');
-    } catch (err) {
-      console.error('Error EmailJS:', err);
+    } catch (err: any) {
+      console.error('Error capturado en el envío:', err);
       setSubmitStatus('error');
+      
+      let detail = 'Error desconocido';
+      if (typeof err === 'string') {
+        detail = err;
+      } else if (err?.text) {
+        detail = err.text;
+      } else if (err?.message) {
+        detail = err.message;
+      } else {
+        detail = JSON.stringify(err);
+      }
+
       setErrorMessage(
-        'Hubo un problema al enviar la solicitud. Verificá tu conexión o copiá el texto con el botón inferior.'
+        `Error al enviar: ${detail}. Por favor, asegurate de que el Service ID (service_5fyu33a) y el Template ID (template_cbj6wwl) estén activos en tu panel de EmailJS.`
       );
     } finally {
       setIsSubmitting(false);
