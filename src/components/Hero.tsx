@@ -15,13 +15,13 @@ export const Hero: React.FC = () => {
                 aria-hidden="true"
               />
               <span className="text-[12px] uppercase tracking-[0.14em] font-semibold text-[#16352A]/80 font-['Inter']">
-                Gestión de Estrategia digital integral para firmas inmobiliarias contemporáneas
+                Comunicación y presencia digital para inmobiliarias
               </span>
             </div>
 
             {/* Playfair Display Headline */}
             <h1 className="hero-title text-[#16352A] font-medium text-balance">
-              Estrategia digital integral para inmobiliarias
+              Estrategia digital integral <br className="hidden md:block" /> para inmobiliarias.
             </h1>
 
             {/* Inter Body Copy */}
@@ -32,19 +32,19 @@ export const Hero: React.FC = () => {
             {/* Actions */}
             <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
               <a
-                href="#community-management"
+                href="#planes"
                 className="inline-flex items-center justify-center gap-2.5 rounded-none border border-[#16352A] bg-[#16352A] px-7 py-3.5 font-['Inter'] text-[15px] font-medium tracking-[-0.01em] text-[#FAF8F5] transition-colors hover:border-[#000000] hover:bg-[#000000] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#16352A]"
               >
-                <span>Community Management</span>
-                <ArrowDown aria-hidden="true" className="h-4 w-4 text-[#E8D0A0]" />
+                <span>Conocer los planes</span>
+                <ArrowUpRight aria-hidden="true" className="h-4 w-4 text-[#E8D0A0]" />
               </a>
 
               <a
                 href="#diseno-web"
                 className="inline-flex items-center justify-center gap-2 rounded-none border border-[rgba(22,53,42,0.3)] bg-transparent px-6 py-3.5 font-['Inter'] text-[15px] font-medium tracking-[-0.01em] text-[#16352A] transition-colors hover:border-[#16352A] hover:bg-[rgba(22,53,42,0.05)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#16352A]"
               >
-                <span>Diseño Web Inmobiliario</span>
-                <ArrowDown aria-hidden="true" className="h-4 w-4 text-[#16352A]/60" />
+                <span>Explorar soluciones web</span>
+                <ArrowUpRight aria-hidden="true" className="h-4 w-4 text-[#16352A]/60" />
               </a>
             </div>
           </div>
@@ -62,7 +62,7 @@ export const Hero: React.FC = () => {
               </div>
               <div className="px-3 pt-3 pb-2 flex items-center justify-between text-xs text-[#475569] font-['Inter']">
                 <span className="font-medium text-[#16352A]">MARKIA Estudio</span>
-                <span className="text-[11px] text-[#475569]/80">Arquitectura editorial & estrategia digital</span>
+                <span className="text-[11px] text-[#475569]/80">Estrategia digital inmobiliaria</span>
               </div>
             </div>
           </div>
@@ -83,13 +83,13 @@ export const Hero: React.FC = () => {
             </div>
             <div className="space-y-1">
               <span className="text-xs uppercase tracking-[0.12em] font-semibold text-[#16352A]/70">Historias en el mes</span>
-              <p className="font-playfair text-2xl sm:text-3xl font-medium text-[#16352A] tabular-nums">30 historias</p>
+              <p className="font-playfair text-2xl sm:text-3xl font-medium text-[#16352A] tabular-nums">30 a 40 historias</p>
               <p className="text-xs text-[#475569]">Flyers diseñados + pautas orgánicas orientadas</p>
             </div>
             <div className="space-y-1">
               <span className="text-xs uppercase tracking-[0.12em] font-semibold text-[#16352A]/70">Preparación previa</span>
               <p className="font-playfair text-2xl sm:text-3xl font-medium text-[#16352A] tabular-nums">15 días</p>
-              <p className="text-xs text-[#475569]">Planificación y guionado sin cargo inicial adicional</p>
+              <p className="text-xs text-[#475569]">Sin cargo adicional por la etapa de preparación inicial</p>
             </div>
           </div>
         </div>

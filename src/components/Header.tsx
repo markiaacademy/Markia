@@ -11,9 +11,9 @@ export const Header: React.FC<HeaderProps> = ({ onSelectPlan }) => {
 
   const navLinks = [
     { label: 'Servicios', href: '#servicios' },
-    { label: 'Community Management', href: '#community-management' },
+    { label: 'Gestión de Redes', href: '#que-incluye' },
     { label: 'Diseño Web', href: '#diseno-web' },
-    { label: 'Cómo trabajamos', href: '#como-trabajamos' },
+    { label: 'Metodología', href: '#proceso' },
     { label: 'FAQs', href: '#faqs' },
   ];
 

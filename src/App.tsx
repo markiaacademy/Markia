@@ -6,6 +6,7 @@ import { IncludedServices } from './components/IncludedServices';
 import { Plans } from './components/Plans';
 import { ComparisonTable } from './components/ComparisonTable';
 import { WebDesignSection } from './components/WebDesignSection';
+import { AboutMarkia } from './components/AboutMarkia';
 import { ProcessAndPreparation } from './components/ProcessAndPreparation';
 import { Conditions } from './components/Conditions';
 import { FaqSection } from './components/FaqSection';
@@ -39,42 +40,43 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#FAF8F5] text-[#16352A] flex flex-col font-['Inter']">
-      {/* Top Header Navigation */}
       <Header />
 
-      {/* Main Content Sections */}
       <main className="flex-1">
-        {/* 1. Hero Section */}
+        {/* 1. Hero */}
         <Hero />
 
-        {/* 2. Overview of the Two Core Services */}
+        {/* 2. Resumen breve de los dos servicios */}
         <ServicesOverview />
 
-        {/* 3. Service 01: Community Management - Included Deliverables & Filmmaker */}
+        {/* 3. Qué incluye la gestión de redes */}
         <IncludedServices />
 
-        {/* 4. Community Management Monthly Plans */}
+        {/* 5. Planes de Community Management */}
         <Plans
           onSelectPlan={handleSelectPlan}
           selectedPlanId={serviceType === 'cm' ? selectedPlanId : undefined}
         />
 
-        {/* 5. Detailed Metric Comparison Table for CM */}
+        {/* Collapsible Comparison Table */}
         <ComparisonTable onSelectPlan={handleSelectPlan} />
 
-        {/* 6. Service 02: Real Estate Web Design & Landing Pages */}
+        {/* 6. Diseño y desarrollo web */}
         <WebDesignSection onSelectWebSolution={handleSelectWebSolution} />
 
-        {/* 7. Methodology & 15-day Initial Preparation */}
+        {/* 7. Quién está detrás de MARKIA */}
+        <AboutMarkia />
+
+        {/* 8. Proceso de trabajo */}
         <ProcessAndPreparation />
 
-        {/* 8. Transparent Collaboration Guidelines */}
-        <Conditions />
-
-        {/* 9. Frequently Asked Questions (Accessible Accordions) */}
+        {/* 9. Preguntas frecuentes */}
         <FaqSection />
 
-        {/* 10. Interactive Proposal Form / Quote Builder */}
+        {/* 9. Condiciones */}
+        <Conditions />
+
+        {/* 10. Formulario de presupuesto */}
         <ContactQuote
           selectedServiceType={serviceType}
           selectedPlanId={selectedPlanId}
@@ -85,7 +87,6 @@ export default function App() {
         />
       </main>
 
-      {/* Footer */}
       <Footer />
 
       {/* Floating Actions */}

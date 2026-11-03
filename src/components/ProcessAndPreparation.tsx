@@ -5,68 +5,59 @@ export const ProcessAndPreparation: React.FC = () => {
   return (
     <section id="proceso" className="py-20 md:py-28 border-t border-[rgba(22,53,42,0.08)] bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
         <div className="max-w-3xl mb-16 space-y-4">
           <div className="inline-flex items-center gap-2.5">
             <span className="w-2 h-2 rounded-full bg-[#E8D0A0]" aria-hidden="true" />
-            <span className="editorial-overline">Metodología & Cronograma</span>
+            <span className="editorial-overline">Metodología</span>
           </div>
 
           <h2 className="section-title text-[#16352A]">
-            Proceso de trabajo
+            Nuestro proceso de trabajo
           </h2>
 
           <p className="text-[16px] leading-relaxed text-[#475569] font-['Inter']">
-            El trabajo se organiza en un flujo previsible para que tu equipo conozca en todo momento el estado de los guiones, los diseños y las fechas de lanzamiento.
+            Trabajamos de forma ordenada para que vos y tu equipo tengan previsibilidad total sobre los contenidos y lanzamientos.
           </p>
         </div>
 
-        {/* Featured Note with Editorial Tape: 15 Días de Preparación Inicial */}
-        <div className="mb-16 max-w-4xl">
-          <div className="editorial-tape p-6 md:p-8 space-y-3">
-            <div className="flex items-center justify-between">
-              <span className="text-[11px] uppercase tracking-[0.14em] font-semibold text-[#16352A]">
-                Criterio Clave de Inicio
-              </span>
-              <span className="text-xs text-[#16352A]/80 font-medium">Sin costo inicial adicional</span>
+        {/* Highlighted Note */}
+        <div className="mb-16 max-w-4xl bg-[#FAF8F5] border border-[rgba(22,53,42,0.08)] p-8">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div className="space-y-2">
+              <span className="text-[10px] uppercase tracking-widest font-bold text-[#16352A]/40">Preparación Inicial</span>
+              <p className="font-playfair text-xl text-[#16352A]">15 días de planificación previa sin cargo adicional.</p>
             </div>
-
-            <p className="editorial-quote">
-              “Contemplamos 15 días de preparación inicial previos al mes de publicaciones, a partir de la recepción del pago del 50% y de los materiales de la inmobiliaria.”
-            </p>
-
-            <p className="text-sm text-[#475569] font-['Inter'] leading-relaxed pt-1">
-              Esta ventana de 15 días permite diagnosticar las plataformas, optimizar el perfil, redactar los guiones estratégicos, coordinar la filmación y diseñar las primeras piezas sin improvisaciones ni retrasos en el calendario.
+            <p className="text-xs text-[#475569] max-w-sm leading-relaxed font-['Inter']">
+              Esta ventana nos permite diagnosticar tus redes, redactar los guiones estratégicos y diseñar las primeras piezas sin improvisaciones.
             </p>
           </div>
         </div>
 
-        {/* Numbered Editorial Timeline Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {TIMELINE_STEPS.map((step) => (
             <div
               key={step.step}
-              className={`p-6 border flex flex-col justify-between ${
+              className={`p-8 border flex flex-col justify-between ${
                 step.isPreparation
-                  ? 'bg-[#FAF8F5] border-[#16352A]/30'
+                  ? 'bg-[#FAF8F5] border-[#16352A]/20'
                   : 'bg-white border-[rgba(22,53,42,0.08)]'
               }`}
             >
               <div>
-                <div className="flex items-baseline justify-between border-b border-[rgba(22,53,42,0.08)] pb-3">
+                <div className="flex items-baseline justify-between border-b border-[rgba(22,53,42,0.08)] pb-4">
                   <span className="font-playfair text-3xl font-normal text-[#16352A] tabular-nums">
                     {step.step}
                   </span>
-                  <span className="text-xs uppercase tracking-wider font-semibold text-[#16352A]/70">
+                  <span className="text-[10px] uppercase tracking-widest font-bold text-[#16352A]/50">
                     {step.subtitle}
                   </span>
                 </div>
 
-                <h3 className="mt-4 font-playfair text-lg font-medium text-[#16352A] leading-snug">
+                <h3 className="mt-6 font-playfair text-xl font-medium text-[#16352A] leading-snug">
                   {step.title}
                 </h3>
 
-                <p className="mt-3 text-xs md:text-sm text-[#475569] leading-relaxed font-['Inter']">
+                <p className="mt-4 text-sm text-[#475569] leading-relaxed font-['Inter']">
                   {step.detail}
                 </p>
               </div>
@@ -74,24 +65,19 @@ export const ProcessAndPreparation: React.FC = () => {
           ))}
         </div>
 
-        {/* Editorial Publications tactile preview */}
-        <div className="mt-14 p-6 sm:p-8 bg-[#FAF8F5] border border-[rgba(22,53,42,0.10)]">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-            <div className="md:col-span-4 aspect-[4/3] overflow-hidden border border-[rgba(22,53,42,0.08)]">
+        <div className="mt-16 p-8 border border-[rgba(22,53,42,0.12)] bg-[#FAF8F5]/30">
+          <div className="flex flex-col md:flex-row items-center gap-8">
+            <div className="md:w-1/3 aspect-video overflow-hidden border border-[rgba(22,53,42,0.10)]">
               <img
                 src="/images/property_interior_living_detail_1793659765124.jpg"
-                alt="Detalle arquitectónico de sala de estar en residencia de lujo con muros de piedra caliza y vistas a la terraza"
-                referrerPolicy="no-referrer"
-                className="w-full h-full object-cover grayscale-[8%]"
+                alt="Detalle arquitectónico"
+                className="w-full h-full object-cover grayscale-[5%]"
               />
             </div>
-            <div className="md:col-span-8 space-y-3">
-              <span className="editorial-overline">Entrega & Ajustes</span>
-              <h3 className="font-playfair text-2xl font-medium text-[#16352A]">
-                Una ronda consolidada de ajustes por entrega mensual.
-              </h3>
+            <div className="md:w-2/3 space-y-4">
+              <h3 className="font-playfair text-2xl font-medium text-[#16352A]">Orden y agilidad</h3>
               <p className="text-sm text-[#475569] leading-relaxed font-['Inter']">
-                Para garantizar la agilidad del calendario de publicación y la excelencia editorial, la inmobiliaria recibe la grilla completa con antelación y realiza una devolución unificada de observaciones. Los carruseles incluyen hasta 6 placas y los reels hasta 60 segundos con edición estándar.
+                Para sostener la calidad editorial, recibís la planificación completa con antelación y realizás una devolución unificada de ajustes. Así, mantenemos la presencia constante de tu marca sin fricciones.
               </p>
             </div>
           </div>

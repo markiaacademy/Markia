@@ -17,7 +17,7 @@ export const Footer: React.FC = () => {
               <span className="sr-only">MARKIA</span>
             </a>
             <p className="text-xs text-[#FAF8F5]/70 max-w-sm leading-relaxed font-['Inter']">
-              Gestión de estrategia digital integral para firmas inmobiliarias contemporáneas.
+              Estrategia digital integral para inmobiliarias.
             </p>
           </div>
 
@@ -33,18 +33,18 @@ export const Footer: React.FC = () => {
                 </a>
               </li>
               <li>
-                <a href="#community-management" className="hover:text-white transition-colors">
-                  Community Management
+                <a href="#que-incluye" className="hover:text-white transition-colors">
+                  Gestión de Redes
                 </a>
               </li>
               <li>
                 <a href="#diseno-web" className="hover:text-white transition-colors">
-                  Diseño & Desarrollo Web
+                  Diseño Web
                 </a>
               </li>
               <li>
-                <a href="#como-trabajamos" className="hover:text-white transition-colors">
-                  Cómo trabajamos
+                <a href="#proceso" className="hover:text-white transition-colors">
+                  Metodología
                 </a>
               </li>
               <li>

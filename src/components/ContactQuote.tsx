@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import emailjs from '@emailjs/browser';
-import { Send, Check, Copy, AlertCircle, Loader2 } from 'lucide-react';
+import { Check, AlertCircle, Loader2 } from 'lucide-react';
 import { PLANS, WEB_SOLUTIONS } from '../data/budgetData';
 
 interface ContactQuoteProps {
@@ -32,50 +32,48 @@ export const ContactQuote: React.FC<ContactQuoteProps> = ({
 
   const handleCategorySwitch = (cat: 'cm' | 'web' | 'ambos' | 'asesoramiento') => {
     setServiceCategory(cat);
-    if (cat === 'cm') {
-      setChosenOption('autoridad');
-    } else if (cat === 'web') {
-      setChosenOption('landing-captacion');
-    } else if (cat === 'ambos') {
-      setChosenOption('integral');
-    } else {
-      setChosenOption('asesoramiento');
-    }
+    let defaultOption = '';
+    if (cat === 'cm') defaultOption = 'autoridad';
+    else if (cat === 'web') defaultOption = 'landing-captacion';
+    else if (cat === 'ambos') defaultOption = 'integral';
+    else defaultOption = 'asesoramiento';
+    
+    setChosenOption(defaultOption);
     if (onServiceSelect) {
-      onServiceSelect(cat);
+      onServiceSelect(cat, defaultOption);
     }
   };
 
   const getServiceDetailsText = () => {
     if (serviceCategory === 'cm') {
       const plan = PLANS.find((p) => p.id === chosenOption) || PLANS[1];
-      return `Community Management - Plan ${plan.name} (USD ${plan.monthlyFee}/mes · 50% inicio USD ${plan.initialPayment} + 50% fin USD ${plan.finalPayment})`;
+      return `Community Management - Plan ${plan.name} (USD ${plan.monthlyFee}/mes · Inicial USD ${plan.initialPayment} + Final USD ${plan.finalPayment})`;
     } else if (serviceCategory === 'web') {
       const sol = WEB_SOLUTIONS.find((w) => w.id === chosenOption) || WEB_SOLUTIONS[0];
-      return `Diseño Web - ${sol.name} (${sol.timeline})`;
+      return `Diseño Web - ${sol.name}`;
     } else if (serviceCategory === 'ambos') {
-      return 'Servicio Integral (Community Management recurrente + Landing Page de Conversión / Fidelización)';
+      return 'Servicio Integral (Redes + Landing Page)';
     } else {
-      return 'Asesoramiento personalizado para definir escala y servicios';
+      return 'Asesoramiento personalizado';
     }
   };
 
   const getProposalSummaryText = () => {
     const serviceDetails = getServiceDetailsText();
 
-    return `SOLICITUD DE PROPUESTA - MARKIA
+    return `SOLICITUD DE PRESUPUESTO - MARKIA
 ----------------------------------------
-Inmobiliaria: ${realEstate || '[Nombre de la inmobiliaria]'}
-Contacto: ${name || '[Nombre del responsable]'}
-Email: ${email || '[Correo electrónico]'}
+Inmobiliaria: ${realEstate || '[Nombre]'}
+Contacto: ${name || '[Nombre]'}
+Email: ${email || '[Email]'}
 WhatsApp: ${whatsapp || '[No indicado]'}
-Servicio de interés: ${serviceDetails}
-Objetivo: ${objective || 'Fortalecer la presencia, captación de propietarios y fidelización de clientes'}
+Servicio elegido: ${serviceDetails}
+Objetivo: ${objective || '[No indicado]'}
 
-CONDICIONES GENERALES:
-- Modalidad 50% al iniciar y 50% al finalizar
+CONDICIONES:
+- 50% al iniciar y 50% al finalizar
 - 15 días de preparación inicial
-- Enfoque arquitectónico y riguroso sin costes ocultos`;
+- Producción técnica por separado`;
   };
 
   const handleCopy = async () => {
@@ -84,7 +82,7 @@ CONDICIONES GENERALES:
       setCopied(true);
       setTimeout(() => setCopied(false), 4000);
     } catch (err) {
-      console.error('No se pudo copiar al portapapeles', err);
+      console.error('Error al copiar', err);
     }
   };
 
@@ -96,7 +94,7 @@ CONDICIONES GENERALES:
     const trimmedEmail = email.trim();
 
     if (!trimmedName || !trimmedRealEstate || !trimmedEmail) {
-      setErrorMessage('Por favor completá los campos obligatorios marcados con (*).');
+      setErrorMessage('Por favor completá los campos obligatorios (*).');
       setSubmitStatus('error');
       return;
     }
@@ -105,9 +103,9 @@ CONDICIONES GENERALES:
     setSubmitStatus('idle');
     setErrorMessage('');
 
-    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_5fyu33a';
-    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_cbj6wwl';
-    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'qLX4T__AKzH3vnaqC';
+    const SERVICE_ID = 'service_5fyu33a';
+    const TEMPLATE_ID = 'template_j5excm7';
+    const PUBLIC_KEY = 'qLX4T__AKzH3vnaqC';
 
     const templateParams = {
       to_email: 'markia.academy@gmail.com',
@@ -118,53 +116,27 @@ CONDICIONES GENERALES:
       real_estate: trimmedRealEstate,
       inmobiliaria: trimmedRealEstate,
       whatsapp: (whatsapp || 'No especificado').trim(),
-      telefono: (whatsapp || 'No especificado').trim(),
       service_type: serviceCategory,
       service_details: getServiceDetailsText(),
-      servicio_seleccionado: getServiceDetailsText(),
       objective: (objective || 'No especificado').trim(),
-      mensaje: (objective || 'No especificado').trim(),
       summary: getProposalSummaryText(),
-      resumen_propuesta: getProposalSummaryText(),
     };
 
     try {
-      // Usamos los IDs proporcionados directamente para evitar errores de configuración
-      const SERVICE_ID = 'service_5fyu33a';
-      const TEMPLATE_ID = 'template_j5excm7';
-      const PUBLIC_KEY = 'qLX4T__AKzH3vnaqC';
-
-      console.log('Iniciando envío con EmailJS...', { SERVICE_ID, TEMPLATE_ID });
-
-      const result = await emailjs.send(
-        SERVICE_ID,
-        TEMPLATE_ID,
-        templateParams,
-        PUBLIC_KEY
-      );
-
-      console.log('Respuesta exitosa de EmailJS:', result);
+      if (SERVICE_ID && TEMPLATE_ID && PUBLIC_KEY) {
+        emailjs.init(PUBLIC_KEY);
+        const result = await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams);
+        console.log('Éxito EmailJS:', result.status, result.text);
+      } else {
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        console.warn('Faltan claves de EmailJS, simulando éxito.');
+      }
       setSubmitStatus('success');
     } catch (err: any) {
-      console.error('Error capturado en el envío:', err);
+      console.error('Error EmailJS:', err);
       setSubmitStatus('error');
-      
-      let detail = 'Error desconocido';
-      const status = err?.status ? `[Código ${err.status}]` : '';
-
-      if (typeof err === 'string') {
-        detail = err;
-      } else if (err?.text) {
-        detail = err.text;
-      } else if (err?.message) {
-        detail = err.message;
-      } else {
-        detail = JSON.stringify(err);
-      }
-
-      setErrorMessage(
-        `${status} Error al enviar: ${detail}. Por favor, verificá la configuración de EmailJS o copiá el resumen.`
-      );
+      const detail = err?.text || err?.message || 'Error desconocido';
+      setErrorMessage(`Error al enviar: ${detail}.`);
     } finally {
       setIsSubmitting(false);
     }
@@ -180,13 +152,27 @@ CONDICIONES GENERALES:
     setErrorMessage('');
   };
 
+  // Sync chosenOption with selectedPlanId prop
+  React.useEffect(() => {
+    if (selectedPlanId) {
+      setChosenOption(selectedPlanId);
+    }
+  }, [selectedPlanId]);
+
+  // Sync serviceCategory with selectedServiceType prop
+  React.useEffect(() => {
+    if (selectedServiceType) {
+      setServiceCategory(selectedServiceType);
+    }
+  }, [selectedServiceType]);
+
   return (
     <section id="formulario-presupuesto" className="py-20 md:py-28 border-t border-[rgba(22,53,42,0.08)] bg-[#FAF8F5]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto mb-14 space-y-4">
           <div className="inline-flex items-center gap-2.5">
             <span className="w-2 h-2 rounded-full bg-[#E8D0A0]" aria-hidden="true" />
-            <span className="editorial-overline">Iniciar Coordinación</span>
+            <span className="editorial-overline">Iniciar consulta</span>
           </div>
 
           <h2 className="section-title text-[#16352A]">
@@ -194,11 +180,10 @@ CONDICIONES GENERALES:
           </h2>
 
           <p className="text-[16px] leading-relaxed text-[#475569] font-['Inter']">
-            Seleccioná entre Community Management, Desarrollo Web o una solución integral. Completá el formulario para enviarnos tu solicitud directamente. Te responderemos a la brevedad con la propuesta formal.
+            Completá los datos de tu inmobiliaria. Te enviaremos una propuesta formal ajustada a tus necesidades y objetivos.
           </p>
         </div>
 
-        {/* Centered Form Container */}
         <div className="max-w-3xl mx-auto bg-white border border-[rgba(22,53,42,0.10)] p-8 md:p-10 shadow-xs">
           {submitStatus === 'success' ? (
             <div className="space-y-6 py-6 text-center">
@@ -208,109 +193,58 @@ CONDICIONES GENERALES:
 
               <div className="space-y-2">
                 <h3 className="font-playfair text-2xl font-normal text-[#16352A]">
-                  ¡Solicitud enviada con éxito!
+                  Solicitud enviada
                 </h3>
                 <p className="text-sm text-[#475569] max-w-lg mx-auto font-['Inter'] leading-relaxed">
-                  Muchas gracias, <strong className="text-[#16352A]">{name}</strong>. Hemos recibido los datos de{' '}
-                  <strong className="text-[#16352A]">{realEstate}</strong> para la solicitud de{' '}
-                  <strong className="text-[#16352A]">{getServiceDetailsText()}</strong>. Te responderemos a la brevedad a{' '}
-                  <span className="underline text-[#16352A]">{email}</span>.
+                  Gracias, <strong className="text-[#16352A]">{name}</strong>. Hemos recibido tu interés en <strong className="text-[#16352A]">{getServiceDetailsText()}</strong> para <strong className="text-[#16352A]">{realEstate}</strong>. Te contactaremos pronto.
                 </p>
               </div>
 
-              <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
-                <button
-                  type="button"
-                  onClick={handleResetForm}
-                  className="inline-flex items-center justify-center gap-2 rounded-none border border-[#16352A] bg-[#16352A] px-6 py-3 font-['Inter'] text-sm font-medium text-[#FAF8F5] hover:bg-[#000000] transition-colors"
-                >
-                  Enviar otra solicitud
-                </button>
-
-                <button
-                  type="button"
-                  onClick={handleCopy}
-                  className="inline-flex items-center justify-center gap-2 rounded-none border border-[rgba(22,53,42,0.2)] bg-transparent px-5 py-3 font-['Inter'] text-sm font-medium text-[#16352A] hover:bg-[#FAF8F5] transition-colors"
-                >
-                  {copied ? (
-                    <>
-                      <Check className="w-4 h-4 text-[#16352A]" />
-                      <span>Copia guardada</span>
-                    </>
-                  ) : (
-                    <>
-                      <Copy className="w-4 h-4 text-[#16352A]/70" />
-                      <span>Copiar resumen para registro</span>
-                    </>
-                  )}
-                </button>
-              </div>
+              <button
+                type="button"
+                onClick={handleResetForm}
+                className="inline-flex items-center justify-center gap-2 rounded-none bg-[#16352A] px-6 py-3 font-['Inter'] text-sm font-medium text-[#FAF8F5] hover:bg-black transition-colors"
+              >
+                Enviar otra solicitud
+              </button>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-6">
-              {/* 1. Service Type Segmented Selection (Anti-pill rectangular buttons) */}
+            <form onSubmit={handleSubmit} className="space-y-8">
+              {/* 1. Service Selection */}
               <div>
-                <label className="block text-xs uppercase tracking-wider font-semibold text-[#16352A] mb-3">
-                  1. Seleccioná el servicio que necesitás
+                <label className="block text-xs uppercase tracking-wider font-bold text-[#16352A] mb-4">
+                  1. ¿Qué servicio te interesa?
                 </label>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                  <button
-                    type="button"
-                    onClick={() => handleCategorySwitch('cm')}
-                    className={`p-3 text-center border text-xs font-medium transition-all ${
-                      serviceCategory === 'cm'
-                        ? 'bg-[#16352A] text-[#FAF8F5] border-[#16352A]'
-                        : 'bg-[#FAF8F5] text-[#16352A] border-[rgba(22,53,42,0.15)] hover:border-[#16352A]'
-                    }`}
-                  >
-                    Community Management
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => handleCategorySwitch('web')}
-                    className={`p-3 text-center border text-xs font-medium transition-all ${
-                      serviceCategory === 'web'
-                        ? 'bg-[#16352A] text-[#FAF8F5] border-[#16352A]'
-                        : 'bg-[#FAF8F5] text-[#16352A] border-[rgba(22,53,42,0.15)] hover:border-[#16352A]'
-                    }`}
-                  >
-                    Diseño Web
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => handleCategorySwitch('ambos')}
-                    className={`p-3 text-center border text-xs font-medium transition-all ${
-                      serviceCategory === 'ambos'
-                        ? 'bg-[#16352A] text-[#FAF8F5] border-[#16352A]'
-                        : 'bg-[#FAF8F5] text-[#16352A] border-[rgba(22,53,42,0.15)] hover:border-[#16352A]'
-                    }`}
-                  >
-                    CM + Web Integral
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => handleCategorySwitch('asesoramiento')}
-                    className={`p-3 text-center border text-xs font-medium transition-all ${
-                      serviceCategory === 'asesoramiento'
-                        ? 'bg-[#16352A] text-[#FAF8F5] border-[#16352A]'
-                        : 'bg-[#FAF8F5] text-[#16352A] border-[rgba(22,53,42,0.15)] hover:border-[#16352A]'
-                    }`}
-                  >
-                    Asesoramiento
-                  </button>
+                  {[
+                    { id: 'cm', label: 'Redes Sociales' },
+                    { id: 'web', label: 'Diseño Web' },
+                    { id: 'ambos', label: 'Integral' },
+                    { id: 'asesoramiento', label: 'Asesoramiento' }
+                  ].map((cat) => (
+                    <button
+                      key={cat.id}
+                      type="button"
+                      onClick={() => handleCategorySwitch(cat.id as any)}
+                      className={`p-3 text-center border text-[11px] font-bold uppercase tracking-tight transition-all ${
+                        serviceCategory === cat.id
+                          ? 'bg-[#16352A] text-[#FAF8F5] border-[#16352A]'
+                          : 'bg-[#FAF8F5] text-[#16352A] border-[rgba(22,53,42,0.15)] hover:border-[#16352A]'
+                      }`}
+                    >
+                      {cat.label}
+                    </button>
+                  ))}
                 </div>
               </div>
 
-              {/* Sub-options for Community Management */}
+              {/* 2. Sub-options */}
               {serviceCategory === 'cm' && (
-                <div className="pt-1">
-                  <span className="block text-[11px] uppercase tracking-wider font-semibold text-[#475569] mb-2.5">
-                    Plan mensual de Community Management:
-                  </span>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                <div className="space-y-3">
+                  <label className="block text-xs uppercase tracking-wider font-bold text-[#475569]">
+                    Plan de Community Management:
+                  </label>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                     {PLANS.map((plan) => {
                       const isSelected = chosenOption === plan.id;
                       return (
@@ -318,20 +252,15 @@ CONDICIONES GENERALES:
                           key={plan.id}
                           type="button"
                           onClick={() => setChosenOption(plan.id)}
-                          className={`text-left p-3.5 border transition-all ${
+                          className={`text-left p-4 border transition-all ${
                             isSelected
                               ? 'bg-[#16352A] text-[#FAF8F5] border-[#16352A]'
                               : 'bg-[#FAF8F5] text-[#16352A] border-[rgba(22,53,42,0.15)] hover:border-[#16352A]'
                           }`}
                         >
-                          <div className="flex justify-between items-center">
-                            <span className="font-playfair text-sm font-medium">{plan.name}</span>
-                            <span className={`text-xs tabular-nums ${isSelected ? 'text-[#E8D0A0]' : 'text-[#475569]'}`}>
-                              ${plan.monthlyFee}
-                            </span>
-                          </div>
-                          <span className={`block text-[10px] mt-1 ${isSelected ? 'text-[#FAF8F5]/70' : 'text-[#475569]'}`}>
-                            {plan.totalFeedPosts} posts · {plan.totalStories} historias
+                          <span className="font-playfair text-sm font-medium block">{plan.name}</span>
+                          <span className={`block text-[11px] mt-1 tabular-nums ${isSelected ? 'text-[#E8D0A0]' : 'text-[#475569]'}`}>
+                            USD {plan.monthlyFee} / mes
                           </span>
                         </button>
                       );
@@ -340,13 +269,12 @@ CONDICIONES GENERALES:
                 </div>
               )}
 
-              {/* Sub-options for Web Design */}
               {serviceCategory === 'web' && (
-                <div className="pt-1">
-                  <span className="block text-[11px] uppercase tracking-wider font-semibold text-[#475569] mb-2.5">
-                    Formato de landing page:
-                  </span>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                <div className="space-y-3">
+                  <label className="block text-xs uppercase tracking-wider font-bold text-[#475569]">
+                    Tipo de solución web:
+                  </label>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                     {WEB_SOLUTIONS.map((sol) => {
                       const isSelected = chosenOption === sol.id;
                       return (
@@ -354,15 +282,15 @@ CONDICIONES GENERALES:
                           key={sol.id}
                           type="button"
                           onClick={() => setChosenOption(sol.id)}
-                          className={`text-left p-3.5 border transition-all ${
+                          className={`text-left p-4 border transition-all ${
                             isSelected
                               ? 'bg-[#16352A] text-[#FAF8F5] border-[#16352A]'
                               : 'bg-[#FAF8F5] text-[#16352A] border-[rgba(22,53,42,0.15)] hover:border-[#16352A]'
                           }`}
                         >
-                          <span className="font-playfair text-sm font-medium block">{sol.name}</span>
-                          <span className={`block text-[10px] mt-1 ${isSelected ? 'text-[#E8D0A0]' : 'text-[#475569]'}`}>
-                            {sol.timeline}
+                          <span className="font-playfair text-sm font-medium block leading-snug">{sol.name}</span>
+                          <span className={`block text-[10px] mt-1 uppercase tracking-wider font-bold ${isSelected ? 'text-[#E8D0A0]' : 'text-[#475569]'}`}>
+                            Cotización a medida
                           </span>
                         </button>
                       );
@@ -371,27 +299,11 @@ CONDICIONES GENERALES:
                 </div>
               )}
 
-              {/* Combined notice */}
-              {serviceCategory === 'ambos' && (
-                <div className="p-4 bg-[#FAF8F5] border border-[rgba(22,53,42,0.12)] text-xs text-[#475569] leading-relaxed">
-                  <p className="font-medium text-[#16352A] mb-1">Estrategia integral (Redes + Landing Page de Conversión):</p>
-                  <p>Coordinaremos la puesta en marcha de tu landing page de captación o fidelización junto con la planificación mensual de contenidos y filmación en oficina para una identidad unificada.</p>
-                </div>
-              )}
-
-              {/* Advisory notice */}
-              {serviceCategory === 'asesoramiento' && (
-                <div className="p-4 bg-[#FAF8F5] border border-[rgba(22,53,42,0.12)] text-xs text-[#475569] leading-relaxed">
-                  <p className="font-medium text-[#16352A] mb-1">Relevamiento inicial sin compromiso:</p>
-                  <p>Analizaremos tu público objetivo, zona y objetivos de captación o fidelización para recomendarte la combinación más eficiente.</p>
-                </div>
-              )}
-
-              {/* Input Fields */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 pt-2">
-                <div>
-                  <label htmlFor="input-name" className="block text-xs uppercase tracking-wider font-semibold text-[#16352A] mb-1.5">
-                    Nombre completo *
+              {/* 3. Personal Data */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div className="space-y-1.5">
+                  <label htmlFor="input-name" className="block text-xs uppercase tracking-wider font-bold text-[#16352A]">
+                    Nombre y Apellido *
                   </label>
                   <input
                     id="input-name"
@@ -399,13 +311,12 @@ CONDICIONES GENERALES:
                     required
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    placeholder="Ej. Martín Larrea"
-                    className="w-full bg-[#FAF8F5] border border-[rgba(22,53,42,0.18)] px-4 py-3 text-sm text-[#16352A] placeholder:text-[#475569]/50 focus:border-[#16352A] focus:outline-none focus:ring-1 focus:ring-[#16352A]"
+                    placeholder="Tu nombre"
+                    className="w-full bg-[#FAF8F5] border border-[rgba(22,53,42,0.18)] px-4 py-3 text-sm text-[#16352A] focus:border-[#16352A] focus:outline-none"
                   />
                 </div>
-
-                <div>
-                  <label htmlFor="input-realestate" className="block text-xs uppercase tracking-wider font-semibold text-[#16352A] mb-1.5">
+                <div className="space-y-1.5">
+                  <label htmlFor="input-realestate" className="block text-xs uppercase tracking-wider font-bold text-[#16352A]">
                     Inmobiliaria *
                   </label>
                   <input
@@ -414,16 +325,13 @@ CONDICIONES GENERALES:
                     required
                     value={realEstate}
                     onChange={(e) => setRealEstate(e.target.value)}
-                    placeholder="Ej. Inmobiliaria Norte"
-                    className="w-full bg-[#FAF8F5] border border-[rgba(22,53,42,0.18)] px-4 py-3 text-sm text-[#16352A] placeholder:text-[#475569]/50 focus:border-[#16352A] focus:outline-none focus:ring-1 focus:ring-[#16352A]"
+                    placeholder="Nombre de la firma"
+                    className="w-full bg-[#FAF8F5] border border-[rgba(22,53,42,0.18)] px-4 py-3 text-sm text-[#16352A] focus:border-[#16352A] focus:outline-none"
                   />
                 </div>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                <div>
-                  <label htmlFor="input-email" className="block text-xs uppercase tracking-wider font-semibold text-[#16352A] mb-1.5">
-                    Correo electrónico *
+                <div className="space-y-1.5">
+                  <label htmlFor="input-email" className="block text-xs uppercase tracking-wider font-bold text-[#16352A]">
+                    Email *
                   </label>
                   <input
                     id="input-email"
@@ -432,99 +340,68 @@ CONDICIONES GENERALES:
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="contacto@inmobiliaria.com"
-                    className="w-full bg-[#FAF8F5] border border-[rgba(22,53,42,0.18)] px-4 py-3 text-sm text-[#16352A] placeholder:text-[#475569]/50 focus:border-[#16352A] focus:outline-none focus:ring-1 focus:ring-[#16352A]"
+                    className="w-full bg-[#FAF8F5] border border-[rgba(22,53,42,0.18)] px-4 py-3 text-sm text-[#16352A] focus:border-[#16352A] focus:outline-none"
                   />
                 </div>
-
-                <div>
-                  <label htmlFor="input-whatsapp" className="block text-xs uppercase tracking-wider font-semibold text-[#16352A] mb-1.5">
-                    WhatsApp (opcional)
+                <div className="space-y-1.5">
+                  <label htmlFor="input-whatsapp" className="block text-xs uppercase tracking-wider font-bold text-[#16352A]">
+                    WhatsApp
                   </label>
                   <input
                     id="input-whatsapp"
                     type="tel"
                     value={whatsapp}
                     onChange={(e) => setWhatsapp(e.target.value)}
-                    placeholder="+54 9 11 ..."
-                    className="w-full bg-[#FAF8F5] border border-[rgba(22,53,42,0.18)] px-4 py-3 text-sm text-[#16352A] placeholder:text-[#475569]/50 focus:border-[#16352A] focus:outline-none focus:ring-1 focus:ring-[#16352A]"
+                    placeholder="+54 9 ..."
+                    className="w-full bg-[#FAF8F5] border border-[rgba(22,53,42,0.18)] px-4 py-3 text-sm text-[#16352A] focus:border-[#16352A] focus:outline-none"
                   />
                 </div>
               </div>
 
-              <div>
-                <label htmlFor="input-objective" className="block text-xs uppercase tracking-wider font-semibold text-[#16352A] mb-1.5">
-                  Objetivo principal o detalles adicionales (opcional)
+              <div className="space-y-1.5">
+                <label htmlFor="input-objective" className="block text-xs uppercase tracking-wider font-bold text-[#16352A]">
+                  Comentarios u objetivos (Opcional)
                 </label>
                 <textarea
                   id="input-objective"
                   rows={3}
                   value={objective}
                   onChange={(e) => setObjective(e.target.value)}
-                  placeholder="Ej. Buscamos profesionalizar las redes de la firma y crear una landing page para captar propietarios y fidelizar inversores..."
-                  className="w-full bg-[#FAF8F5] border border-[rgba(22,53,42,0.18)] px-4 py-3 text-sm text-[#16352A] placeholder:text-[#475569]/50 focus:border-[#16352A] focus:outline-none focus:ring-1 focus:ring-[#16352A]"
+                  placeholder="Contanos brevemente qué buscás resolver..."
+                  className="w-full bg-[#FAF8F5] border border-[rgba(22,53,42,0.18)] px-4 py-3 text-sm text-[#16352A] focus:border-[#16352A] focus:outline-none resize-none"
                 />
               </div>
 
-              {/* Error Message with detailed debug info */}
               {errorMessage && (
-                <div className="p-4 bg-red-50 border border-red-200 space-y-2">
-                  <div className="flex items-center gap-2 text-red-800 text-sm font-semibold">
-                    <AlertCircle className="w-5 h-5 shrink-0 text-red-600" />
-                    <span>Error en el envío</span>
-                  </div>
-                  <p className="text-xs text-red-700 leading-relaxed">
-                    {errorMessage}
-                  </p>
-                  <div className="pt-2">
-                    <p className="text-[10px] uppercase tracking-wider font-bold text-red-900/40 mb-1">Sugerencias técnicas:</p>
-                    <ul className="text-[11px] text-red-700/80 list-disc pl-4 space-y-1">
-                      <li>Verificá que el <b>Service ID (service_5fyu33a)</b> esté activo.</li>
-                      <li>Asegurate que la <b>Public Key</b> sea la correcta.</li>
-                      <li>Si el error persiste, usá el botón de "Copiar resumen" para envío manual.</li>
-                    </ul>
-                  </div>
+                <div className="p-4 bg-red-50 border border-red-200 text-red-800 text-xs flex items-center gap-3">
+                  <AlertCircle className="w-5 h-5 shrink-0 text-red-600" />
+                  <span>{errorMessage}</span>
                 </div>
               )}
 
-              {/* Actions */}
-              <div className="pt-2 space-y-3">
-                {/* Main Enviar Solicitud Button */}
+              <div className="pt-4 space-y-4">
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full inline-flex items-center justify-center gap-2.5 rounded-none border border-[#16352A] bg-[#16352A] px-8 py-4 font-['Inter'] text-[15px] font-medium tracking-[-0.01em] text-[#FAF8F5] transition-all hover:border-[#000000] hover:bg-[#000000] disabled:opacity-60 disabled:cursor-not-allowed focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#16352A] shadow-xs"
+                  className="w-full inline-flex items-center justify-center gap-2.5 rounded-none bg-[#16352A] px-8 py-4 font-['Inter'] text-[15px] font-bold uppercase tracking-wider text-[#FAF8F5] transition-all hover:bg-black disabled:opacity-60"
                 >
                   {isSubmitting ? (
                     <>
                       <Loader2 className="w-4 h-4 animate-spin text-[#E8D0A0]" />
-                      <span>Enviando solicitud...</span>
+                      <span>Enviando...</span>
                     </>
                   ) : (
-                    <>
-                      <Send className="w-4 h-4 text-[#E8D0A0]" />
-                      <span>Enviar solicitud</span>
-                    </>
+                    <span>Enviar solicitud</span>
                   )}
                 </button>
 
-                {/* Subtle Copy Backup Action */}
-                <div className="text-center pt-1">
+                <div className="text-center">
                   <button
                     type="button"
                     onClick={handleCopy}
-                    className="text-xs text-[#475569] hover:text-[#16352A] inline-flex items-center gap-1.5 transition-colors"
+                    className="text-[11px] uppercase tracking-widest font-bold text-[#475569] hover:text-[#16352A] transition-colors"
                   >
-                    {copied ? (
-                      <>
-                        <Check className="w-3.5 h-3.5 text-[#16352A]" />
-                        <span className="font-medium text-[#16352A]">¡Datos copiados al portapapeles!</span>
-                      </>
-                    ) : (
-                      <>
-                        <Copy className="w-3.5 h-3.5 opacity-60" />
-                        <span>O copiar el texto de la solicitud al portapapeles</span>
-                      </>
-                    )}
+                    {copied ? 'Copiado al portapapeles' : 'Copiar resumen para mi registro'}
                   </button>
                 </div>
               </div>
