@@ -1,4 +1,5 @@
 import React from 'react';
+import { ClipboardCheck } from 'lucide-react';
 import { TIMELINE_STEPS } from '../data/budgetData';
 
 export const ProcessAndPreparation: React.FC = () => {
@@ -21,7 +22,7 @@ export const ProcessAndPreparation: React.FC = () => {
         </div>
 
         {/* Highlighted Note */}
-        <div className="mb-16 max-w-4xl bg-[#FAF8F5] border border-[rgba(22,53,42,0.08)] p-8">
+        <div className="mb-16 max-w-4xl bg-[#FAF8F5] border border-[rgba(22,53,42,0.08)] p-8 rounded-3xl">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div className="space-y-2">
               <span className="text-[10px] uppercase tracking-widest font-bold text-[#16352A]/40">Preparación Inicial</span>
@@ -37,7 +38,7 @@ export const ProcessAndPreparation: React.FC = () => {
           {TIMELINE_STEPS.map((step) => (
             <div
               key={step.step}
-              className={`p-8 border flex flex-col justify-between ${
+              className={`p-8 border flex flex-col justify-between rounded-3xl ${
                 step.isPreparation
                   ? 'bg-[#FAF8F5] border-[#16352A]/20'
                   : 'bg-white border-[rgba(22,53,42,0.08)]'
@@ -65,14 +66,10 @@ export const ProcessAndPreparation: React.FC = () => {
           ))}
         </div>
 
-        <div className="mt-16 p-8 border border-[rgba(22,53,42,0.12)] bg-[#FAF8F5]/30">
+        <div className="mt-16 p-8 border border-[rgba(22,53,42,0.12)] bg-[#FAF8F5]/30 rounded-3xl">
           <div className="flex flex-col md:flex-row items-center gap-8">
-            <div className="md:w-1/3 aspect-video overflow-hidden border border-[rgba(22,53,42,0.10)]">
-              <img
-                src="/images/property_interior_living_detail_1793659765124.jpg"
-                alt="Detalle arquitectónico"
-                className="w-full h-full object-cover grayscale-[5%]"
-              />
+            <div className="md:w-1/3 aspect-square flex items-center justify-center">
+              <ClipboardCheck className="w-12 h-12 text-[#16352A]" strokeWidth={1.25} />
             </div>
             <div className="md:w-2/3 space-y-4">
               <h3 className="font-playfair text-2xl font-medium text-[#16352A]">Orden y agilidad</h3>

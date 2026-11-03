@@ -15,15 +15,15 @@ export const ComparisonTable: React.FC<ComparisonTableProps> = () => {
         <div className="flex flex-col items-center">
           <button
             onClick={() => setIsExpanded(!isExpanded)}
-            className="group inline-flex items-center gap-3 px-8 py-4 border border-[rgba(22,53,42,0.15)] hover:border-[#16352A] transition-all"
+            className="group inline-flex items-center gap-3 px-8 py-4 border border-[rgba(22,53,42,0.15)] hover:border-[#16352A] transition-all rounded-2xl"
           >
             <span className="font-playfair text-lg font-medium text-[#16352A]">
               {isExpanded ? 'Ocultar detalles comparativos' : 'Comparar todos los detalles'}
             </span>
             {isExpanded ? (
-              <ChevronUp className="w-5 h-5 text-[#16352A]" />
+              <ChevronUp className="w-5 h-5 text-[#16352A]" strokeWidth={1.25} />
             ) : (
-              <ChevronDown className="w-5 h-5 text-[#16352A] animate-bounce" />
+              <ChevronDown className="w-5 h-5 text-[#16352A] animate-bounce" strokeWidth={1.25} />
             )}
           </button>
         </div>
@@ -31,7 +31,7 @@ export const ComparisonTable: React.FC<ComparisonTableProps> = () => {
         {isExpanded && (
           <div className="mt-12 space-y-12 animate-in fade-in slide-in-from-top-4 duration-500">
             {/* Responsive Table Wrapper */}
-            <div className="overflow-x-auto border border-[rgba(22,53,42,0.12)] bg-[#FAF8F5]">
+            <div className="overflow-x-auto border border-[rgba(22,53,42,0.12)] bg-[#FAF8F5] rounded-3xl">
               <table className="w-full text-left border-collapse min-w-[720px]">
                 <thead>
                   <tr className="border-b border-[rgba(22,53,42,0.12)] bg-[#FAF8F5]">
@@ -102,11 +102,11 @@ export const ComparisonTable: React.FC<ComparisonTableProps> = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-xs text-[#475569] leading-relaxed">
-              <div className="p-6 border border-[rgba(22,53,42,0.08)] bg-[#FAF8F5]">
+              <div className="p-6 border border-[rgba(22,53,42,0.08)] bg-[#FAF8F5] rounded-2xl">
                 <h4 className="font-semibold text-[#16352A] mb-2 uppercase tracking-wider">Historias Orgánicas Guiadas</h4>
                 <p>Corresponden a pautas e ideas que te damos para el contenido cotidiano de tu equipo. No equivalen a piezas gráficas diseñadas. La dinámica de captura, entrega y publicación se acuerda al inicio según la estructura de tu inmobiliaria.</p>
               </div>
-              <div className="p-6 border border-[rgba(22,53,42,0.08)] bg-[#FAF8F5]">
+              <div className="p-6 border border-[rgba(22,53,42,0.08)] bg-[#FAF8F5] rounded-2xl">
                 <h4 className="font-semibold text-[#16352A] mb-2 uppercase tracking-wider">Producción Audiovisual</h4>
                 <p>Todos los planes incluyen la coordinación de una jornada mensual de grabación en tu oficina. Es importante aclarar que los honorarios del filmmaker, los traslados y la producción técnica se cotizan por separado.</p>
               </div>

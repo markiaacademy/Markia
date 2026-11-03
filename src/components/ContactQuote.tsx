@@ -184,7 +184,7 @@ CONDICIONES:
           </p>
         </div>
 
-        <div className="max-w-3xl mx-auto bg-white border border-[rgba(22,53,42,0.10)] p-8 md:p-10 shadow-xs">
+        <div className="max-w-3xl mx-auto bg-white border border-[rgba(22,53,42,0.10)] p-8 md:p-10 shadow-xs rounded-3xl">
           {submitStatus === 'success' ? (
             <div className="space-y-6 py-6 text-center">
               <div className="w-14 h-14 mx-auto rounded-full bg-[#16352A]/5 flex items-center justify-center border border-[#16352A]/15">
@@ -228,8 +228,8 @@ CONDICIONES:
                       onClick={() => handleCategorySwitch(cat.id as any)}
                       className={`p-3 text-center border text-[11px] font-bold uppercase tracking-tight transition-all ${
                         serviceCategory === cat.id
-                          ? 'bg-[#16352A] text-[#FAF8F5] border-[#16352A]'
-                          : 'bg-[#FAF8F5] text-[#16352A] border-[rgba(22,53,42,0.15)] hover:border-[#16352A]'
+                          ? 'bg-[#16352A] text-[#FAF8F5] border-[#16352A] rounded-xl'
+                          : 'bg-[#FAF8F5] text-[#16352A] border-[rgba(22,53,42,0.15)] hover:border-[#16352A] rounded-xl'
                       }`}
                     >
                       {cat.label}
@@ -254,8 +254,8 @@ CONDICIONES:
                           onClick={() => setChosenOption(plan.id)}
                           className={`text-left p-4 border transition-all ${
                             isSelected
-                              ? 'bg-[#16352A] text-[#FAF8F5] border-[#16352A]'
-                              : 'bg-[#FAF8F5] text-[#16352A] border-[rgba(22,53,42,0.15)] hover:border-[#16352A]'
+                              ? 'bg-[#16352A] text-[#FAF8F5] border-[#16352A] rounded-xl'
+                              : 'bg-[#FAF8F5] text-[#16352A] border-[rgba(22,53,42,0.15)] hover:border-[#16352A] rounded-xl'
                           }`}
                         >
                           <span className="font-playfair text-sm font-medium block">{plan.name}</span>
@@ -284,8 +284,8 @@ CONDICIONES:
                           onClick={() => setChosenOption(sol.id)}
                           className={`text-left p-4 border transition-all ${
                             isSelected
-                              ? 'bg-[#16352A] text-[#FAF8F5] border-[#16352A]'
-                              : 'bg-[#FAF8F5] text-[#16352A] border-[rgba(22,53,42,0.15)] hover:border-[#16352A]'
+                              ? 'bg-[#16352A] text-[#FAF8F5] border-[#16352A] rounded-xl'
+                              : 'bg-[#FAF8F5] text-[#16352A] border-[rgba(22,53,42,0.15)] hover:border-[#16352A] rounded-xl'
                           }`}
                         >
                           <span className="font-playfair text-sm font-medium block leading-snug">{sol.name}</span>
@@ -312,7 +312,7 @@ CONDICIONES:
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="Tu nombre"
-                    className="w-full bg-[#FAF8F5] border border-[rgba(22,53,42,0.18)] px-4 py-3 text-sm text-[#16352A] focus:border-[#16352A] focus:outline-none"
+                    className="w-full bg-[#FAF8F5] border border-[rgba(22,53,42,0.18)] px-4 py-3 text-sm text-[#16352A] focus:border-[#16352A] focus:outline-none rounded-xl"
                   />
                 </div>
                 <div className="space-y-1.5">
@@ -326,7 +326,7 @@ CONDICIONES:
                     value={realEstate}
                     onChange={(e) => setRealEstate(e.target.value)}
                     placeholder="Nombre de la firma"
-                    className="w-full bg-[#FAF8F5] border border-[rgba(22,53,42,0.18)] px-4 py-3 text-sm text-[#16352A] focus:border-[#16352A] focus:outline-none"
+                    className="w-full bg-[#FAF8F5] border border-[rgba(22,53,42,0.18)] px-4 py-3 text-sm text-[#16352A] focus:border-[#16352A] focus:outline-none rounded-xl"
                   />
                 </div>
                 <div className="space-y-1.5">
@@ -340,7 +340,7 @@ CONDICIONES:
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="contacto@inmobiliaria.com"
-                    className="w-full bg-[#FAF8F5] border border-[rgba(22,53,42,0.18)] px-4 py-3 text-sm text-[#16352A] focus:border-[#16352A] focus:outline-none"
+                    className="w-full bg-[#FAF8F5] border border-[rgba(22,53,42,0.18)] px-4 py-3 text-sm text-[#16352A] focus:border-[#16352A] focus:outline-none rounded-xl"
                   />
                 </div>
                 <div className="space-y-1.5">
@@ -353,7 +353,7 @@ CONDICIONES:
                     value={whatsapp}
                     onChange={(e) => setWhatsapp(e.target.value)}
                     placeholder="+54 9 ..."
-                    className="w-full bg-[#FAF8F5] border border-[rgba(22,53,42,0.18)] px-4 py-3 text-sm text-[#16352A] focus:border-[#16352A] focus:outline-none"
+                    className="w-full bg-[#FAF8F5] border border-[rgba(22,53,42,0.18)] px-4 py-3 text-sm text-[#16352A] focus:border-[#16352A] focus:outline-none rounded-xl"
                   />
                 </div>
               </div>
@@ -368,7 +368,7 @@ CONDICIONES:
                   value={objective}
                   onChange={(e) => setObjective(e.target.value)}
                   placeholder="Contanos brevemente qué buscás resolver..."
-                  className="w-full bg-[#FAF8F5] border border-[rgba(22,53,42,0.18)] px-4 py-3 text-sm text-[#16352A] focus:border-[#16352A] focus:outline-none resize-none"
+                  className="w-full bg-[#FAF8F5] border border-[rgba(22,53,42,0.18)] px-4 py-3 text-sm text-[#16352A] focus:border-[#16352A] focus:outline-none resize-none rounded-xl"
                 />
               </div>
 
@@ -383,11 +383,11 @@ CONDICIONES:
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full inline-flex items-center justify-center gap-2.5 rounded-none bg-[#16352A] px-8 py-4 font-['Inter'] text-[15px] font-bold uppercase tracking-wider text-[#FAF8F5] transition-all hover:bg-black disabled:opacity-60"
+                  className="w-full inline-flex items-center justify-center gap-2.5 rounded-2xl bg-[#16352A] px-8 py-4 font-['Inter'] text-[15px] font-bold uppercase tracking-wider text-[#FAF8F5] transition-all hover:bg-black disabled:opacity-60"
                 >
                   {isSubmitting ? (
                     <>
-                      <Loader2 className="w-4 h-4 animate-spin text-[#E8D0A0]" />
+                      <Loader2 className="w-4 h-4 animate-spin text-[#E8D0A0]" strokeWidth={1.25} />
                       <span>Enviando...</span>
                     </>
                   ) : (

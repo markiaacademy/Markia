@@ -50,13 +50,13 @@ export const Header: React.FC<HeaderProps> = ({ onSelectPlan }) => {
 
         {/* Zone 3: Primary Action CTA */}
         <div className="hidden sm:flex items-center shrink-0">
-          <a
-            href="#formulario-presupuesto"
-            className="inline-flex items-center justify-center gap-2.5 rounded-none border border-[#16352A] bg-[#16352A] px-7 py-3.5 font-['Inter'] text-[15px] font-medium tracking-[-0.01em] text-[#FAF8F5] transition-colors hover:border-[#000000] hover:bg-[#000000] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#16352A]"
-          >
-            <span>Empezar</span>
-            <ArrowUpRight aria-hidden="true" className="h-4 w-4 text-[#E8D0A0]" />
-          </a>
+            <a
+              href="#formulario-presupuesto"
+              className="inline-flex items-center justify-center gap-2.5 rounded-2xl border border-[#16352A] bg-[#16352A] px-7 py-3.5 font-['Inter'] text-[15px] font-medium tracking-[-0.01em] text-[#FAF8F5] transition-colors hover:border-[#000000] hover:bg-[#000000] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#16352A]"
+            >
+              <span>Empezar</span>
+              <ArrowUpRight aria-hidden="true" className="h-4 w-4 text-[#E8D0A0]" strokeWidth={1.25} />
+            </a>
         </div>
 
         {/* Mobile Hamburger Toggle */}
@@ -64,11 +64,11 @@ export const Header: React.FC<HeaderProps> = ({ onSelectPlan }) => {
           <button
             type="button"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="p-2.5 text-[#16352A] border border-[rgba(22,53,42,0.15)] rounded-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#16352A]"
+            className="p-2.5 text-[#16352A] border border-[rgba(22,53,42,0.15)] rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#16352A]"
             aria-expanded={isMobileMenuOpen}
             aria-label={isMobileMenuOpen ? 'Cerrar menú' : 'Abrir menú'}
           >
-            {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            {isMobileMenuOpen ? <X className="w-5 h-5" strokeWidth={1.25} /> : <Menu className="w-5 h-5" strokeWidth={1.25} />}
           </button>
         </div>
       </div>
@@ -92,10 +92,10 @@ export const Header: React.FC<HeaderProps> = ({ onSelectPlan }) => {
             <a
               href="#planes"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="w-full inline-flex items-center justify-center gap-2.5 rounded-none border border-[#16352A] bg-[#16352A] px-7 py-3.5 font-['Inter'] text-[15px] font-medium text-[#FAF8F5] transition-colors hover:bg-black"
+              className="w-full inline-flex items-center justify-center gap-2.5 rounded-2xl border border-[#16352A] bg-[#16352A] px-7 py-3.5 font-['Inter'] text-[15px] font-medium text-[#FAF8F5] transition-colors hover:bg-black"
             >
               <span>Empezar</span>
-              <ArrowUpRight aria-hidden="true" className="h-4 w-4 text-[#E8D0A0]" />
+              <ArrowUpRight aria-hidden="true" className="h-4 w-4 text-[#E8D0A0]" strokeWidth={1.25} />
             </a>
           </div>
         </div>

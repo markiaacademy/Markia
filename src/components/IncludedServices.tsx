@@ -1,4 +1,5 @@
 import React from 'react';
+import { Video } from 'lucide-react';
 import { INCLUDED_SERVICES } from '../data/budgetData';
 
 export const IncludedServices: React.FC = () => {
@@ -39,13 +40,9 @@ export const IncludedServices: React.FC = () => {
         </div>
 
         {/* Filmmaker and coordination clarification */}
-        <div className="mt-20 p-8 border border-[rgba(22,53,42,0.12)] bg-[#FAF8F5] flex flex-col md:flex-row items-center gap-8">
-          <div className="md:w-1/3 aspect-square overflow-hidden border border-[rgba(22,53,42,0.08)] grayscale-[15%] contrast-[1.05]">
-            <img
-              src="/images/filmmaker_edge_recording_session_1793660333128.jpg"
-              alt="Coordinación de grabación profesional en oficina"
-              className="w-full h-full object-cover"
-            />
+        <div className="mt-20 p-8 border border-[rgba(22,53,42,0.12)] bg-[#FAF8F5] flex flex-col md:flex-row items-center gap-8 rounded-3xl">
+          <div className="md:w-1/3 aspect-square flex items-center justify-center">
+            <Video className="w-12 h-12 text-[#16352A]" strokeWidth={1.25} />
           </div>
           <div className="md:w-2/3 space-y-4">
             <h3 className="font-playfair text-2xl font-medium text-[#16352A]">Coordinación de grabación</h3>

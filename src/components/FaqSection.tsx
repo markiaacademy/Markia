@@ -55,6 +55,7 @@ export const FaqSection: React.FC = () => {
                           isOpen ? 'rotate-180' : ''
                         }`}
                         aria-hidden="true"
+                        strokeWidth={1.25}
                       />
                     </span>
                   </button>

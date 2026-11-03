@@ -33,28 +33,28 @@ export const Hero: React.FC = () => {
             <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
               <a
                 href="#planes"
-                className="inline-flex items-center justify-center gap-2.5 rounded-none border border-[#16352A] bg-[#16352A] px-7 py-3.5 font-['Inter'] text-[15px] font-medium tracking-[-0.01em] text-[#FAF8F5] transition-colors hover:border-[#000000] hover:bg-[#000000] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#16352A]"
+                className="inline-flex items-center justify-center gap-2.5 rounded-2xl border border-[#16352A] bg-[#16352A] px-7 py-3.5 font-['Inter'] text-[15px] font-medium tracking-[-0.01em] text-[#FAF8F5] transition-all hover:border-[#000000] hover:bg-[#000000] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#16352A]"
               >
                 <span>Conocer los planes</span>
-                <ArrowUpRight aria-hidden="true" className="h-4 w-4 text-[#E8D0A0]" />
+                <ArrowUpRight aria-hidden="true" className="h-4 w-4 text-[#E8D0A0]" strokeWidth={1.25} />
               </a>
 
               <a
                 href="#diseno-web"
-                className="inline-flex items-center justify-center gap-2 rounded-none border border-[rgba(22,53,42,0.3)] bg-transparent px-6 py-3.5 font-['Inter'] text-[15px] font-medium tracking-[-0.01em] text-[#16352A] transition-colors hover:border-[#16352A] hover:bg-[rgba(22,53,42,0.05)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#16352A]"
+                className="inline-flex items-center justify-center gap-2 rounded-2xl border border-[rgba(22,53,42,0.3)] bg-transparent px-6 py-3.5 font-['Inter'] text-[15px] font-medium tracking-[-0.01em] text-[#16352A] transition-all hover:border-[#16352A] hover:bg-[rgba(22,53,42,0.05)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#16352A]"
               >
                 <span>Explorar soluciones web</span>
-                <ArrowUpRight aria-hidden="true" className="h-4 w-4 text-[#16352A]/60" />
+                <ArrowUpRight aria-hidden="true" className="h-4 w-4 text-[#16352A]/60" strokeWidth={1.25} />
               </a>
             </div>
           </div>
 
           {/* Right Column: Architectural Visual Asset */}
           <div className="lg:col-span-5">
-            <div className="relative border border-[rgba(22,53,42,0.10)] bg-white p-2 shadow-sm">
-              <div className="relative aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/5] overflow-hidden bg-[#FAF8F5]">
+            <div className="relative border border-[rgba(22,53,42,0.10)] bg-white p-2 shadow-sm rounded-3xl">
+              <div className="relative aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/5] overflow-hidden bg-[#FAF8F5] rounded-2xl">
                 <img
-                  src="/images/hero_luxury_property_architecture_1793659764651.jpg"
+                  src="/images/hero_luxury_real_estate.jpg"
                   alt="Propiedad residencial contemporánea de alto estándar con arquitectura en piedra travertino y piscina"
                   referrerPolicy="no-referrer"
                   className="w-full h-full object-cover grayscale-[10%] contrast-[1.03] transition-transform duration-700 hover:scale-105"

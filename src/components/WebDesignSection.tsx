@@ -34,11 +34,11 @@ export const WebDesignSection: React.FC<WebDesignSectionProps> = ({ onSelectWebS
         </div>
 
         {/* Visual Showcase Card */}
-        <div className="mb-16 border border-[rgba(22,53,42,0.10)] bg-[#FAF8F5] p-6 sm:p-8">
+        <div className="mb-16 border border-[rgba(22,53,42,0.10)] bg-[#FAF8F5] p-6 sm:p-8 rounded-3xl">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            <div className="lg:col-span-7 aspect-[4/3] overflow-hidden bg-white border border-[rgba(22,53,42,0.08)]">
+            <div className="lg:col-span-7 aspect-[4/3] overflow-hidden bg-white border border-[rgba(22,53,42,0.08)] rounded-2xl">
               <img
-                src="/images/web_design_realestate_showcase_1793660532408.jpg"
+                src="/images/web_design_showcase.jpg"
                 alt="Diseño web inmobiliario minimalista"
                 className="w-full h-full object-cover grayscale-[4%]"
               />
@@ -61,7 +61,7 @@ export const WebDesignSection: React.FC<WebDesignSectionProps> = ({ onSelectWebS
           {WEB_PILLARS.map((pillar, index) => (
             <div
               key={pillar.title}
-              className="bg-[#FAF8F5] border border-[rgba(22,53,42,0.08)] p-8 flex flex-col justify-between"
+              className="bg-[#FAF8F5] border border-[rgba(22,53,42,0.08)] p-8 flex flex-col justify-between rounded-2xl"
             >
               <div>
                 <div className="flex items-center justify-between pb-4 border-b border-[rgba(22,53,42,0.06)]">
@@ -86,7 +86,7 @@ export const WebDesignSection: React.FC<WebDesignSectionProps> = ({ onSelectWebS
             {WEB_SOLUTIONS.map((item: WebSolutionItem) => (
               <div
                 key={item.id}
-                className="bg-[#FAF8F5] border border-[rgba(22,53,42,0.10)] p-8 md:p-10 flex flex-col justify-between"
+                className="bg-[#FAF8F5] border border-[rgba(22,53,42,0.10)] p-8 md:p-10 flex flex-col justify-between rounded-3xl"
               >
                 <div>
                   <span className="text-[10px] uppercase tracking-widest font-bold text-[#16352A]/60">
@@ -105,12 +105,12 @@ export const WebDesignSection: React.FC<WebDesignSectionProps> = ({ onSelectWebS
 
                   <div className="mt-8 space-y-4">
                     <span className="text-[10px] uppercase tracking-widest font-bold text-[#16352A]/40 block">
-                      Funcionalidades posibles:
+                      Funcionalidades posibles, según presupuesto:
                     </span>
                     <ul className="space-y-3 text-sm text-[#475569] font-['Inter']">
                       {item.features.map((feature, idx) => (
                         <li key={idx} className="flex items-start gap-2.5">
-                          <Check className="w-4 h-4 text-[#16352A] shrink-0 mt-0.5" />
+                          <Check className="w-4 h-4 text-[#16352A] shrink-0 mt-0.5" strokeWidth={1.25} />
                           <span className="leading-snug">{feature}</span>
                         </li>
                       ))}
@@ -122,17 +122,17 @@ export const WebDesignSection: React.FC<WebDesignSectionProps> = ({ onSelectWebS
                   <button
                     type="button"
                     onClick={() => handlePresupuestar(item.id)}
-                    className="w-full inline-flex items-center justify-center gap-2.5 rounded-none bg-[#16352A] px-6 py-4 font-['Inter'] text-[13px] font-bold uppercase tracking-widest text-[#FAF8F5] hover:bg-black transition-all"
+                    className="w-full inline-flex items-center justify-center gap-2.5 rounded-2xl bg-[#16352A] px-6 py-4 font-['Inter'] text-[13px] font-bold uppercase tracking-widest text-[#FAF8F5] hover:bg-black transition-all"
                   >
                     <span>Presupuestar</span>
-                    <ArrowUpRight className="w-4 h-4" />
+                    <ArrowUpRight className="w-4 h-4" strokeWidth={1.25} />
                   </button>
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="p-8 border border-[rgba(22,53,42,0.12)] bg-[#FAF8F5]/50 space-y-4">
+          <div className="p-8 border border-[rgba(22,53,42,0.12)] bg-[#FAF8F5]/50 space-y-4 rounded-2xl">
             <h4 className="text-xs uppercase tracking-widest font-bold text-[#16352A]">Nota sobre integraciones y soporte</h4>
             <p className="text-xs text-[#475569] leading-relaxed max-w-4xl">
               Las integraciones con CRM, los accesos privados y otras funcionalidades especiales se definen y cotizan según el alcance del proyecto. El costo de hosting, dominio y mantenimiento anual son responsabilidad del cliente según las condiciones acordadas.

@@ -34,7 +34,7 @@ export const Plans: React.FC<PlansProps> = ({ onSelectPlan, selectedPlanId }) =>
             return (
               <div
                 key={plan.id}
-                className={`relative flex flex-col justify-between bg-white border transition-all duration-300 ${
+                className={`relative flex flex-col justify-between bg-white border transition-all duration-300 rounded-3xl ${
                   isSelected
                     ? 'border-[#16352A] shadow-md ring-1 ring-[#16352A]'
                     : isAutoridad
@@ -73,7 +73,7 @@ export const Plans: React.FC<PlansProps> = ({ onSelectPlan, selectedPlanId }) =>
                   </div>
 
                   {/* Metric Strip */}
-                  <div className="mt-8 py-5 px-5 bg-[#FAF8F5] border border-[rgba(22,53,42,0.06)] space-y-4">
+                  <div className="mt-8 py-5 px-5 bg-[#FAF8F5] border border-[rgba(22,53,42,0.06)] space-y-4 rounded-xl">
                     <div className="flex justify-between items-baseline">
                       <span className="text-[10px] uppercase tracking-widest font-bold text-[#475569]">Feed mensual</span>
                       <span className="font-semibold text-sm tabular-nums text-[#16352A]">{plan.totalFeedPosts} piezas</span>
@@ -97,7 +97,7 @@ export const Plans: React.FC<PlansProps> = ({ onSelectPlan, selectedPlanId }) =>
                     <ul className="space-y-3.5 text-sm text-[#475569] font-['Inter']">
                       {plan.highlights.map((item, idx) => (
                         <li key={idx} className="flex items-start gap-3">
-                          <Check className="w-4 h-4 text-[#16352A] shrink-0 mt-0.5" />
+                          <Check className="w-4 h-4 text-[#16352A] shrink-0 mt-0.5" strokeWidth={1.25} />
                           <span className="leading-snug">{item}</span>
                         </li>
                       ))}
@@ -109,7 +109,7 @@ export const Plans: React.FC<PlansProps> = ({ onSelectPlan, selectedPlanId }) =>
                   <button
                     type="button"
                     onClick={() => onSelectPlan(plan.id)}
-                    className={`w-full inline-flex items-center justify-center gap-2.5 rounded-none px-7 py-4 font-['Inter'] text-[14px] font-bold uppercase tracking-widest transition-all ${
+                    className={`w-full inline-flex items-center justify-center gap-2.5 rounded-2xl px-7 py-4 font-['Inter'] text-[14px] font-bold uppercase tracking-widest transition-all ${
                       isSelected
                         ? 'bg-black text-[#FAF8F5]'
                         : isAutoridad
@@ -118,7 +118,7 @@ export const Plans: React.FC<PlansProps> = ({ onSelectPlan, selectedPlanId }) =>
                     }`}
                   >
                     <span>{isSelected ? 'Elegido' : 'Seleccionar'}</span>
-                    <ArrowUpRight className="h-4 w-4" />
+                    <ArrowUpRight className="h-4 w-4" strokeWidth={1.25} />
                   </button>
                 </div>
               </div>
