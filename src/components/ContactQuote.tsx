@@ -101,9 +101,9 @@ CONDICIONES GENERALES:
     setSubmitStatus('idle');
     setErrorMessage('');
 
-    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_5fyu33a';
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_cbj6wwl';
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'qLX4T__AKzH3vnaqC';
 
     const templateParams = {
       to_email: 'markia.academy@gmail.com',
