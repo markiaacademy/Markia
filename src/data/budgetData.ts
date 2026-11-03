@@ -93,9 +93,9 @@ export const PLANS: PlanItem[] = [
     carousels: 6,
     reels: 6,
     totalFeedPosts: 16,
-    totalStories: 30,
+    totalStories: 40,
     storyFlyers: 30,
-    organicStories: 0,
+    organicStories: 10,
     recordingCoordination: '1 mensual en oficina',
     goalReview: 'Reunión mensual de hasta 60 min en reemplazo de la anterior y una acción mensual de comunicación dentro del volumen',
     commentManagement: 'Incluida (días hábiles)',
@@ -104,7 +104,7 @@ export const PLANS: PlanItem[] = [
     adCoordination: 'Coordinación publicitaria con especialista en pauta',
     highlights: [
       '16 publicaciones mensuales en feed (6 reels, 6 carruseles, 4 estáticos)',
-      '30 historias 100% producidas en flyers de alto impacto',
+      '40 historias (30 producidas + 10 pautas orgánicas)',
       '1 recurso de valor mensual: ebook, guía, checklist o landing page',
       '1 capacitación mensual online de hasta 60 min para agentes',
       'Coordinación publicitaria y reunión mensual de 60 min',
@@ -220,7 +220,7 @@ export const COMPARISON_ROWS = [
     concept: 'Historias totales',
     presencia: '30',
     autoridad: '30',
-    premium: '30',
+    premium: '40',
   },
   {
     concept: 'Flyers diseñados para historias',
@@ -232,7 +232,7 @@ export const COMPARISON_ROWS = [
     concept: 'Historias orgánicas guiadas',
     presencia: '18',
     autoridad: '10',
-    premium: '0',
+    premium: '10',
   },
   {
     concept: 'Coordinación de grabación en oficina',

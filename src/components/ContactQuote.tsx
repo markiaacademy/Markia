@@ -91,7 +91,11 @@ CONDICIONES GENERALES:
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!name.trim() || !realEstate.trim() || !email.trim()) {
+    const trimmedName = name.trim();
+    const trimmedRealEstate = realEstate.trim();
+    const trimmedEmail = email.trim();
+
+    if (!trimmedName || !trimmedRealEstate || !trimmedEmail) {
       setErrorMessage('Por favor completá los campos obligatorios marcados con (*).');
       setSubmitStatus('error');
       return;
@@ -107,19 +111,19 @@ CONDICIONES GENERALES:
 
     const templateParams = {
       to_email: 'markia.academy@gmail.com',
-      from_name: name,
-      user_name: name,
-      reply_to: email,
-      user_email: email,
-      real_estate: realEstate,
-      inmobiliaria: realEstate,
-      whatsapp: whatsapp || 'No especificado',
-      telefono: whatsapp || 'No especificado',
+      from_name: trimmedName,
+      user_name: trimmedName,
+      reply_to: trimmedEmail,
+      user_email: trimmedEmail,
+      real_estate: trimmedRealEstate,
+      inmobiliaria: trimmedRealEstate,
+      whatsapp: (whatsapp || 'No especificado').trim(),
+      telefono: (whatsapp || 'No especificado').trim(),
       service_type: serviceCategory,
       service_details: getServiceDetailsText(),
       servicio_seleccionado: getServiceDetailsText(),
-      objective: objective || 'No especificado',
-      mensaje: objective || 'No especificado',
+      objective: (objective || 'No especificado').trim(),
+      mensaje: (objective || 'No especificado').trim(),
       summary: getProposalSummaryText(),
       resumen_propuesta: getProposalSummaryText(),
     };
@@ -128,15 +132,13 @@ CONDICIONES GENERALES:
       if (serviceId && templateId && publicKey) {
         await emailjs.send(serviceId, templateId, templateParams, publicKey);
       } else {
-        // En entorno de previsualización o si faltan las credenciales en .env
-        await new Promise((resolve) => setTimeout(resolve, 800));
-        console.info(
-          'EmailJS: Configuración lista. Para envíos reales completá VITE_EMAILJS_SERVICE_ID, VITE_EMAILJS_TEMPLATE_ID y VITE_EMAILJS_PUBLIC_KEY en .env.'
-        );
+        // Fallback for development/missing keys
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        console.warn('EmailJS keys missing, simulating successful send.');
       }
       setSubmitStatus('success');
     } catch (err) {
-      console.error('Error al enviar la solicitud mediante EmailJS:', err);
+      console.error('Error EmailJS:', err);
       setSubmitStatus('error');
       setErrorMessage(
         'Hubo un problema al enviar la solicitud. Verificá tu conexión o copiá el texto con el botón inferior.'
