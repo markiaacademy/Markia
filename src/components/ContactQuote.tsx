@@ -150,6 +150,8 @@ CONDICIONES GENERALES:
       setSubmitStatus('error');
       
       let detail = 'Error desconocido';
+      const status = err?.status ? `[Código ${err.status}]` : '';
+
       if (typeof err === 'string') {
         detail = err;
       } else if (err?.text) {
@@ -161,7 +163,7 @@ CONDICIONES GENERALES:
       }
 
       setErrorMessage(
-        `Error al enviar: ${detail}. Por favor, asegurate de que el Service ID (service_5fyu33a) y el Template ID (template_cbj6wwl) estén activos en tu panel de EmailJS.`
+        `${status} Error al enviar: ${detail}. Por favor, asegurate de que el Service ID (service_5fyu33a) y el Template ID (template_cbj6wwl) estén activos en tu panel de EmailJS.`
       );
     } finally {
       setIsSubmitting(false);
@@ -463,11 +465,25 @@ CONDICIONES GENERALES:
                 />
               </div>
 
-              {/* Error Message if any */}
+              {/* Error Message with detailed debug info */}
               {errorMessage && (
-                <div className="p-3.5 bg-red-50 border border-red-200 text-red-800 text-xs flex items-center gap-2">
-                  <AlertCircle className="w-4 h-4 shrink-0 text-red-600" />
-                  <span>{errorMessage}</span>
+                <div className="p-4 bg-red-50 border border-red-200 space-y-2">
+                  <div className="flex items-center gap-2 text-red-800 text-sm font-semibold">
+                    <AlertCircle className="w-5 h-5 shrink-0 text-red-600" />
+                    <span>Error en el envío</span>
+                  </div>
+                  <p className="text-xs text-red-700 leading-relaxed">
+                    {errorMessage}
+                  </p>
+                  <div className="pt-2">
+                    <p className="text-[10px] uppercase tracking-wider font-bold text-red-900/40 mb-1">Sugerencias técnicas:</p>
+                    <ul className="text-[11px] text-red-700/80 list-disc pl-4 space-y-1">
+                      <li>Verificá que el <b>Service ID (service_5fyu33a)</b> esté conectado en EmailJS.</li>
+                      <li>Asegurate que la <b>Public Key</b> no tenga espacios.</li>
+                      <li>Si tenés un bloqueador de anuncios (AdBlock), terminalo para esta página.</li>
+                      <li>Si el error persiste, usá el botón de "Copiar resumen" y envialo por WhatsApp/Email manualmente.</li>
+                    </ul>
+                  </div>
                 </div>
               )}
 
